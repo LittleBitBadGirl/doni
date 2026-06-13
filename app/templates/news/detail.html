@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+  <div class="page-container-narrow">
+    <nav class="breadcrumb">
+      <a href="/news">Новости</a>
+      <span>/</span>
+      <span class="text-doni-bark/80">{{ news_item.title }}</span>
+    </nav>
+
+    <article class="card animate-fade-up">
+      <header class="mb-6 pb-6 border-b border-doni-green/10">
+        {% if news_item.is_pinned %}
+        <span class="badge-urgent mb-4">Важное объявление</span>
+        {% endif %}
+        <h1 class="font-display text-3xl md:text-4xl font-semibold text-doni-green-dark leading-tight">{{ news_item.title }}</h1>
+        <time class="text-sm text-doni-bark/50 mt-3 block" datetime="{{ news_item.published_at.isoformat() }}">
+          Опубликовано {{ news_item.published_at | format_datetime_long }}
+        </time>
+      </header>
+
+      <div class="prose-doni">
+        {{ news_item.content | safe }}
+      </div>
+    </article>
+
+    <div class="mt-6">
+      <a href="/news" class="link-arrow">К списку новостей</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

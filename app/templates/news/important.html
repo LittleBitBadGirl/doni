@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+  <div class="page-container-narrow">
+    <h1 class="page-title animate-fade-up">Важно!</h1>
+    <p class="page-lead animate-fade-up stagger-1">
+      Срочные объявления и важная информация для собственников ТСН «ДОНИ».
+    </p>
+
+    {% if news_items %}
+    <div class="space-y-4 mt-10">
+      {% for item in news_items %}
+      <article class="card border-l-4 border-l-doni-gold hover:shadow-card-hover transition animate-fade-up" style="animation-delay: {{ loop.index0 * 0.05 }}s">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <span class="badge-urgent mb-3">Срочно</span>
+            <h2 class="font-display text-xl font-semibold text-doni-green-dark">
+              <a href="/news/{{ item.id }}" class="hover:text-doni-green transition">
+                {{ item.title }}
+              </a>
+            </h2>
+            <p class="text-sm text-doni-bark/70 mt-2 leading-relaxed">{{ item.content | excerpt(220) }}</p>
+          </div>
+          <time class="text-sm text-doni-bark/50 shrink-0 font-medium" datetime="{{ item.published_at.isoformat() }}">
+            {{ item.published_at | format_datetime }}
+          </time>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    {% if total_pages > 1 %}
+    <nav class="mt-10 flex items-center justify-center gap-3" aria-label="Пагинация">
+      {% if page > 1 %}
+      <a href="/news/important?page={{ page - 1 }}" class="btn-ghost">← Назад</a>
+      {% endif %}
+      <span class="text-sm text-doni-bark/60 px-2">Страница {{ page }} из {{ total_pages }}</span>
+      {% if page < total_pages %}
+      <a href="/news/important?page={{ page + 1 }}" class="btn-ghost">Вперёд →</a>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+    {% else %}
+    <div class="card mt-10">
+      <p class="text-doni-bark/70">Сейчас нет опубликованных важных объявлений.</p>
+    </div>
+    {% endif %}
+
+    <div class="mt-8">
+      <a href="/news" class="link-arrow">Все новости</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

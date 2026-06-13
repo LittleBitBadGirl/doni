@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+  <div class="page-container">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-8">
+      <div>
+        <h1 class="page-title animate-fade-up">Документы</h1>
+        <p class="page-lead animate-fade-up stagger-1">Устав, положения, протоколы и отчётность правления.</p>
+      </div>
+      <a href="/documents/assembly" class="link-arrow animate-fade-up stagger-2 shrink-0">
+        Архив собраний по годам
+      </a>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-8">
+      <a href="/documents"
+         class="{% if not active_category %}nav-pill-active{% else %}nav-pill-inactive{% endif %}">
+        Все
+      </a>
+      {% for cat, label in categories.items() %}
+      {% if cat.value != 'assembly' %}
+      <a href="/documents?category={{ cat.value }}"
+         class="{% if active_category == cat %}nav-pill-active{% else %}nav-pill-inactive{% endif %}">
+        {{ label }}
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if documents %}
+    <div class="card overflow-hidden p-0 animate-fade-up">
+      <ul class="divide-y divide-doni-green/8">
+        {% for doc in documents %}
+        <li class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between hover:bg-doni-mist/40 transition">
+          <div>
+            <p class="font-medium text-doni-green-dark">{{ doc.title }}</p>
+            <p class="text-sm text-doni-bark/50 mt-1">
+              {{ doc.category | category_label }}
+              {% if doc.year %} · {{ doc.year }}{% endif %}
+              · {{ doc.file_size_bytes | format_file_size }}
+            </p>
+          </div>
+          <a href="/files/{{ doc.id }}" class="btn-secondary shrink-0 text-xs py-2 px-4">
+            Скачать
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% else %}
+    <div class="card">
+      <p class="text-doni-bark/70">
+        {% if active_category %}
+        В этой категории документов пока нет.
+        {% else %}
+        Документы пока не опубликованы.
+        {% endif %}
+      </p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

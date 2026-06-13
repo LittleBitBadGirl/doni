@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+  <div class="page-container">
+    <nav class="breadcrumb">
+      <a href="/infrastructure/gas">Инфраструктура</a>
+      <span>/</span>
+      <span class="text-doni-bark/80">{{ page.title }}</span>
+    </nav>
+
+    <div class="flex flex-col gap-8 lg:flex-row">
+      <aside class="lg:w-60 shrink-0">
+        <nav class="card p-4 sticky top-24">
+          <p class="text-xs font-semibold uppercase tracking-widest text-doni-bark/50 mb-3">Разделы</p>
+          <ul class="space-y-1">
+            {% for nav in nav_pages %}
+            <li>
+              <a href="/infrastructure/{{ nav.slug }}"
+                 class="block rounded-xl px-3 py-2.5 text-sm font-medium transition
+                        {% if active_slug == nav.slug %}bg-doni-green text-white shadow-sm{% else %}text-doni-bark hover:bg-doni-mist{% endif %}">
+                {{ nav.title }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </aside>
+
+      <article class="flex-1 card animate-fade-up">
+        <header class="mb-6 pb-6 border-b border-doni-green/10">
+          <h1 class="font-display text-3xl md:text-4xl font-semibold text-doni-green-dark leading-tight">{{ page.title }}</h1>
+          <p class="text-sm text-doni-bark/50 mt-2">
+            Обновлено {{ page.updated_at | format_datetime_long }}
+          </p>
+        </header>
+
+        <div class="prose-doni">
+          {{ page.content | safe }}
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% if query and query | length < 2 %}
+<p class="text-sm text-doni-bark/50">Введите минимум 2 символа для поиска.</p>
+
+{% elif query %}
+{% if news_items or documents %}
+<div class="space-y-8">
+  {% if news_items %}
+  <section>
+    <h2 class="font-display text-lg font-semibold text-doni-green-dark mb-3">Новости ({{ news_items | length }})</h2>
+    <ul class="card divide-y divide-doni-green/8 p-0 overflow-hidden">
+      {% for item in news_items %}
+      <li class="p-5 hover:bg-doni-mist/40 transition">
+        <a href="/news/{{ item.id }}" class="block group">
+          <p class="font-medium text-doni-bark group-hover:text-doni-green transition">{{ item.title }}</p>
+          <p class="text-sm text-doni-bark/60 mt-1.5 leading-relaxed">{{ item.content | excerpt(120) }}</p>
+          <time class="text-xs text-doni-bark/50 mt-2 block">{{ item.published_at | format_datetime }}</time>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if documents %}
+  <section>
+    <h2 class="font-display text-lg font-semibold text-doni-green-dark mb-3">Документы ({{ documents | length }})</h2>
+    <ul class="card divide-y divide-doni-green/8 p-0 overflow-hidden">
+      {% for doc in documents %}
+      <li class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between hover:bg-doni-mist/40 transition">
+        <div>
+          <p class="font-medium text-doni-green-dark">{{ doc.title }}</p>
+          <p class="text-sm text-doni-bark/50 mt-0.5">{{ doc.category | category_label }}{% if doc.year %} · {{ doc.year }}{% endif %}</p>
+        </div>
+        <a href="/files/{{ doc.id }}" class="link-arrow shrink-0">Скачать</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+</div>
+
+{% else %}
+<div class="card">
+  <p class="text-doni-bark/70">По запросу «{{ query }}» ничего не найдено.</p>
+</div>
+{% endif %}
+
+{% else %}
+<p class="text-sm text-doni-bark/50">Введите запрос для поиска по новостям и документам.</p>
+{% endif %}

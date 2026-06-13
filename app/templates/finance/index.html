@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+  <div class="page-container-narrow">
+    <h1 class="page-title animate-fade-up">Финансы</h1>
+    <p class="page-lead animate-fade-up stagger-1">Взносы, реквизиты для оплаты и актуальная информация о задолженностях.</p>
+
+    {% if finance %}
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-2 mb-8 mt-10">
+      <div class="stat-card animate-fade-up stagger-1">
+        <h2 class="text-sm font-semibold uppercase tracking-widest text-doni-bark/50 mb-2">Членский взнос</h2>
+        <p class="stat-value">{{ finance.membership_fee_per_sotka | format_money }}</p>
+        <p class="text-sm text-doni-bark/60 mt-2">за 100 м² (сотку) в год</p>
+      </div>
+      <div class="stat-card animate-fade-up stagger-2">
+        <h2 class="text-sm font-semibold uppercase tracking-widest text-doni-bark/50 mb-2">Целевой взнос</h2>
+        <p class="stat-value">{{ finance.target_fee_per_plot | format_money }}</p>
+        <p class="text-sm text-doni-bark/60 mt-2">с участка</p>
+      </div>
+    </div>
+
+    {% if finance.payment_deadline %}
+    <div class="card mb-8 border-l-4 border-l-doni-gold animate-fade-up stagger-3">
+      <h2 class="font-display text-lg font-semibold text-doni-green-dark mb-2">Срок оплаты</h2>
+      <p class="text-doni-bark/80">
+        Взносы необходимо оплатить до
+        <strong class="text-doni-green-dark">{{ finance.payment_deadline | format_date }}</strong>.
+      </p>
+    </div>
+    {% endif %}
+
+    <div class="card mb-8 animate-fade-up stagger-3">
+      <h2 class="font-display text-lg font-semibold text-doni-green-dark mb-4">Реквизиты для оплаты</h2>
+      <pre class="whitespace-pre-wrap text-sm text-doni-bark/90 font-sans leading-relaxed card-inset">{{ finance.bank_details }}</pre>
+    </div>
+
+    <div class="card animate-fade-up stagger-4">
+      <h2 class="font-display text-lg font-semibold text-doni-green-dark mb-3">Список должников</h2>
+      {% if debtors_available %}
+      <p class="text-sm text-doni-bark/70 mb-4 leading-relaxed">
+        Актуальный список задолженностей по взносам. Документ обновляется правлением.
+      </p>
+      <a href="/finance/debtors" class="btn-secondary">
+        Скачать список должников
+      </a>
+      {% elif finance.debtors_filename %}
+      <p class="text-doni-bark/70">
+        Список должников подготовлен, но файл ещё не загружен на сервер. Обратитесь в правление.
+      </p>
+      {% else %}
+      <p class="text-doni-bark/70">
+        Список должников пока не опубликован. Информация появится после утверждения правлением.
+      </p>
+      {% endif %}
+    </div>
+
+    <p class="text-xs text-doni-bark/50 mt-6">
+      Обновлено {{ finance.updated_at | format_datetime_long }}
+    </p>
+    {% else %}
+    <div class="card mt-10">
+      <p class="text-doni-bark/70">
+        Финансовая информация пока не опубликована. Обратитесь в правление ТСН «ДОНИ».
+      </p>
+    </div>
+    {% endif %}
+
+    <div class="mt-8">
+      <a href="/documents?category=regulation" class="link-arrow">Положения о взносах в разделе «Документы»</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
