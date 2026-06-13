@@ -4,11 +4,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('admin:statics', path='css/tabler.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('admin:statics', path='css/fontawesome.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('admin:statics', path='css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('admin:statics', path='css/flatpickr.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('admin:statics', path='css/main.css') }}">
+  <style>
+    :root {
+      --doni-green: #2d6a4f;
+      --doni-green-dark: #1b4332;
+      --doni-green-light: #40916c;
+      --doni-sand: #f4f1de;
+      --doni-parchment: #faf7f0;
+      --doni-bark: #5c4a3d;
+      --doni-gold: #c9a227;
+      --tblr-primary: var(--doni-green);
+      --tblr-primary-rgb: 45, 106, 79;
+      --tblr-body-bg: var(--doni-parchment);
+      --tblr-body-font-family: "Newsreader", Georgia, serif;
+      --tblr-font-sans-serif: "Newsreader", Georgia, serif;
+    }
+
+    body {
+      background: var(--doni-parchment);
+      color: var(--doni-bark);
+      font-family: var(--tblr-body-font-family);
+    }
+
+    h1, h2, h3, .card-title, .page-title, .navbar-brand h3 {
+      font-family: "Fraunces", Georgia, serif;
+      color: var(--doni-green-dark);
+      font-weight: 600;
+    }
+
+    .navbar-vertical.navbar-dark,
+    aside.navbar-dark {
+      background: var(--doni-green-dark);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .navbar-vertical .nav-link.active,
+    .navbar-vertical .nav-link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .navbar-brand h3,
+    .navbar-brand-image {
+      color: #fff;
+    }
+
+    .doni-brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.75rem;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--doni-gold);
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-right: 0.75rem;
+    }
+
+    .card {
+      border: 1px solid rgba(27, 67, 50, 0.12);
+      box-shadow: none;
+      border-radius: 0.375rem;
+    }
+
+    .card-header {
+      background: #fff;
+      border-bottom: 1px solid rgba(27, 67, 50, 0.08);
+    }
+
+    .btn-primary {
+      background: var(--doni-green);
+      border-color: var(--doni-green);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: var(--doni-green-light);
+      border-color: var(--doni-green-light);
+    }
+
+    .btn-secondary {
+      background: var(--doni-sand);
+      border-color: rgba(92, 74, 61, 0.15);
+      color: var(--doni-bark);
+    }
+
+    .page-item.active .page-link {
+      background: var(--doni-green);
+      border-color: var(--doni-green);
+    }
+
+    .table thead th {
+      text-transform: none;
+      font-weight: 600;
+      color: var(--doni-green-dark);
+      background: rgba(232, 240, 235, 0.5);
+    }
+
+    .table td, .table th {
+      vertical-align: middle;
+    }
+
+    .page-wrapper {
+      background: var(--doni-parchment);
+    }
+
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: var(--doni-bark);
+    }
+
+    .nav-link-title {
+      font-size: 0.95rem;
+    }
+
+    .sidebar-footer-link {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .sidebar-footer-link:hover {
+      color: #fff;
+    }
+  </style>
   {% block head %}
   {% endblock %}
   <title>{{ admin.title }}</title>
@@ -47,9 +186,20 @@
             }
           },
         });
+
+        $(document).off("shown.bs.modal", "#modal-delete").on("shown.bs.modal", "#modal-delete", function (event) {
+          var element = $(event.relatedTarget);
+          var name = element.data("name");
+          var pk = element.data("pk");
+          $("#modal-delete-text").text("Безвозвратно удалить «" + name + "»?");
+          $("#modal-delete-button").attr("data-url", element.data("url"));
+        });
       }
 
       document.querySelectorAll("form").forEach(function (form) {
+        if (form.closest("#modal-delete")) {
+          return;
+        }
         form.addEventListener("submit", function (event) {
           const token = getCsrfToken();
           if (!token) {

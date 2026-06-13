@@ -23,3 +23,6 @@ class AdminUser(Base):
         default=lambda: datetime.now(timezone.utc),
         nullable=False,
     )
+
+    def __str__(self) -> str:
+        return self.full_name
