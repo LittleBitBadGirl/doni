@@ -7,7 +7,7 @@
   <meta name="description" content="{% block description %}Официальный информационный портал ТСН «ДОНИ», Пушкинский район Санкт-Петербурга{% endblock %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', path='css/output.css') }}">
   <style>[x-cloak] { display: none !important; }</style>
   <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
@@ -18,8 +18,10 @@
     <div class="page-container">
       <div class="flex items-center justify-between py-4 md:py-5">
         <a href="/" class="site-logo group">
-          <span class="flex items-center gap-3.5">
-            <span class="site-logo-mark">Д</span>
+          <span class="flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 border border-white/15 font-display text-lg font-bold text-doni-gold group-hover:bg-white/15 transition">
+              Д
+            </span>
             <span>
               ТСН «ДОНИ»
               <span class="site-logo-sub">Пушкинский район</span>
@@ -27,7 +29,7 @@
           </span>
         </a>
         <button type="button"
-                class="md:hidden rounded-lg p-2.5 hover:bg-white/8 transition border border-doni-gold/20 text-doni-gold-light"
+                class="md:hidden rounded-xl p-2.5 hover:bg-white/10 transition border border-white/10"
                 @click="mobileOpen = !mobileOpen"
                 :aria-expanded="mobileOpen"
                 aria-label="Открыть меню">
@@ -59,7 +61,7 @@
            x-transition:enter-start="opacity-0 -translate-y-2"
            x-transition:enter-end="opacity-100 translate-y-0"
            @click.outside="mobileOpen = false"
-           class="md:hidden border-t border-doni-gold/20 pb-5">
+           class="md:hidden border-t border-white/15 pb-4">
         <div class="grid grid-cols-2 gap-1.5 pt-4">
           <a href="/" class="mobile-nav-link" @click="mobileOpen = false">Главная</a>
           <a href="/news" class="mobile-nav-link" @click="mobileOpen = false">Новости</a>
@@ -80,29 +82,29 @@
   </main>
 
   <footer class="site-footer">
-    <div class="page-container py-12 md:py-14">
-      <div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+    <div class="page-container py-10 md:py-12">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         <div>
-          <p class="footer-heading">ТСН «ДОНИ»</p>
-          <p class="text-sm mt-3 leading-relaxed text-white/60">
+          <p class="font-display text-lg font-semibold text-doni-green-dark">ТСН «ДОНИ»</p>
+          <p class="text-sm text-doni-bark/70 mt-2 leading-relaxed">
             Товарищество собственников недвижимости<br>
             Пушкинский район, Санкт-Петербург
           </p>
         </div>
         <div>
-          <p class="footer-label">Разделы</p>
-          <ul class="space-y-2.5 text-sm">
-            <li><a href="/news" class="footer-link">Новости</a></li>
-            <li><a href="/news/important" class="footer-link">Важно!</a></li>
-            <li><a href="/finance" class="footer-link">Финансы и взносы</a></li>
-            <li><a href="/documents" class="footer-link">Документы</a></li>
-            <li><a href="/infrastructure/gas" class="footer-link">Инфраструктура</a></li>
-            <li><a href="/contacts" class="footer-link">Контакты</a></li>
+          <p class="text-xs font-semibold uppercase tracking-widest text-doni-bark/50 mb-3">Разделы</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/news" class="text-doni-bark/80 hover:text-doni-green transition">Новости</a></li>
+            <li><a href="/news/important" class="text-doni-bark/80 hover:text-doni-green transition">Важно!</a></li>
+            <li><a href="/finance" class="text-doni-bark/80 hover:text-doni-green transition">Финансы и взносы</a></li>
+            <li><a href="/documents" class="text-doni-bark/80 hover:text-doni-green transition">Документы</a></li>
+            <li><a href="/infrastructure/gas" class="text-doni-bark/80 hover:text-doni-green transition">Инфраструктура</a></li>
+            <li><a href="/contacts" class="text-doni-bark/80 hover:text-doni-green transition">Контакты</a></li>
           </ul>
         </div>
         <div>
-          <p class="footer-label">Информация</p>
-          <p class="text-sm leading-relaxed text-white/60">
+          <p class="text-xs font-semibold uppercase tracking-widest text-doni-bark/50 mb-3">Информация</p>
+          <p class="text-sm text-doni-bark/70 leading-relaxed">
             Официальный портал для собственников участков.
             Актуальные новости, финансы, протоколы собраний и статус инфраструктуры.
           </p>
@@ -110,7 +112,7 @@
           <a href="{{ telegram_subscribe_url }}"
              target="_blank"
              rel="noopener noreferrer"
-             class="inline-flex items-center gap-2 mt-5 text-sm font-medium text-doni-gold-light hover:text-white transition">
+             class="inline-flex items-center gap-2 mt-4 text-sm font-medium text-doni-green hover:text-doni-green-dark transition">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
             </svg>
@@ -121,21 +123,21 @@
           <a href="{{ telegram_inlet_bot_url }}"
              target="_blank"
              rel="noopener noreferrer"
-             class="inline-flex items-center gap-2 mt-3 text-sm text-white/50 hover:text-doni-gold-light transition">
+             class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-doni-bark/80 hover:text-doni-green transition">
             Опубликовать через бота (для правления)
           </a>
           {% endif %}
         </div>
       </div>
-      <div class="mt-12 pt-6 border-t border-doni-gold/15 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <p class="text-sm text-white/40">© 2026 ТСН «ДОНИ»</p>
-        <a href="/search" class="text-sm text-doni-gold-light/80 hover:text-doni-gold-light transition">Поиск по сайту</a>
+      <div class="mt-10 pt-6 border-t border-doni-green/10 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-sm text-doni-bark/50">© 2026 ТСН «ДОНИ»</p>
+        <a href="/search" class="text-sm text-doni-green hover:text-doni-green-dark transition">Поиск по сайту</a>
       </div>
     </div>
   </footer>
 
   <div id="cookie-banner"
-       class="cookie-banner"
+       class="fixed bottom-0 left-0 right-0 z-50 bg-doni-parchment/95 backdrop-blur-md border-t border-doni-green/15 p-4 shadow-card"
        x-data="{
          visible: !localStorage.getItem('cookie_consent'),
          accept() {
@@ -152,12 +154,12 @@
        x-transition:enter-start="opacity-0 translate-y-4"
        x-transition:enter-end="opacity-100 translate-y-0">
     <div class="page-container flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-      <p class="text-sm max-w-2xl text-white/75">
+      <p class="text-sm text-doni-bark/80 max-w-2xl">
         Мы используем cookie и сервис Яндекс.Метрика для анализа посещаемости сайта.
         Продолжая пользоваться сайтом, вы соглашаетесь с использованием cookie.
       </p>
       <button type="button"
-              class="btn-primary shrink-0 !bg-doni-gold !border-doni-gold !text-doni-green-dark hover:!bg-doni-gold-light hover:!border-doni-gold-light"
+              class="btn-primary shrink-0"
               @click="accept()">
         Принять
       </button>

@@ -12,9 +12,6 @@
       <article class="card-hover animate-fade-up" style="animation-delay: {{ loop.index0 * 0.05 }}s">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            {% if item.is_pinned %}
-            <span class="badge-urgent mb-3">Важное</span>
-            {% endif %}
             <h2 class="font-display text-xl font-semibold text-doni-green-dark">
               <a href="/news/{{ item.id }}" class="hover:text-doni-green transition">
                 {{ item.title }}

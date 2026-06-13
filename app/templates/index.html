@@ -63,7 +63,7 @@
           </svg>
         </div>
         <h2 class="feature-card-title">Новости</h2>
-        <p class="text-sm text-doni-bark-light leading-relaxed">Оперативные объявления и архив публикаций правления</p>
+        <p class="text-sm text-doni-bark/70 leading-relaxed">Оперативные объявления и архив публикаций правления</p>
       </a>
       <a href="/finance" class="card-hover group animate-fade-up stagger-2">
         <div class="feature-icon mb-5">
@@ -72,7 +72,7 @@
           </svg>
         </div>
         <h2 class="feature-card-title">Финансы</h2>
-        <p class="text-sm text-doni-bark-light leading-relaxed">Взносы, реквизиты и информация о задолженностях</p>
+        <p class="text-sm text-doni-bark/70 leading-relaxed">Взносы, реквизиты и информация о задолженностях</p>
       </a>
       <a href="/documents" class="card-hover group animate-fade-up stagger-3 sm:col-span-2 lg:col-span-1">
         <div class="feature-icon mb-5">
@@ -81,33 +81,29 @@
           </svg>
         </div>
         <h2 class="feature-card-title">Документы</h2>
-        <p class="text-sm text-doni-bark-light leading-relaxed">Устав, протоколы собраний и отчётность</p>
+        <p class="text-sm text-doni-bark/70 leading-relaxed">Устав, протоколы собраний и отчётность</p>
       </a>
     </div>
 
     {% if pinned_news %}
     <div class="mb-14 animate-fade-up stagger-3">
       <div class="section-header !border-0 !pb-0 mb-6">
-        <div>
-          <p class="section-label">Срочное</p>
-          <h2 class="section-title">Важные объявления</h2>
-        </div>
-        <a href="/news/important" class="link-arrow shrink-0">Раздел «Важно!»</a>
+        <h2 class="section-title">Важно!</h2>
+        <a href="/news/important" class="link-arrow shrink-0">Все объявления</a>
       </div>
       <div class="space-y-4">
         {% for item in pinned_news %}
         <article class="announcement-card">
           <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <span class="badge-urgent mb-3">Срочно</span>
               <h3 class="font-display text-xl font-semibold text-doni-green-dark">
                 <a href="/news/{{ item.id }}" class="hover:text-doni-green transition">
                   {{ item.title }}
                 </a>
               </h3>
-              <p class="text-sm text-doni-bark-light mt-2 leading-relaxed">{{ item.content | excerpt(180) }}</p>
+              <p class="text-sm text-doni-bark/70 mt-2 leading-relaxed">{{ item.content | excerpt(180) }}</p>
             </div>
-            <time class="text-sm text-doni-bark-light/70 shrink-0 font-medium tabular-nums" datetime="{{ item.published_at.isoformat() }}">
+            <time class="text-sm text-doni-bark/50 shrink-0 font-medium tabular-nums" datetime="{{ item.published_at.isoformat() }}">
               {{ item.published_at | format_datetime }}
             </time>
           </div>
@@ -132,11 +128,11 @@
           <a href="/news/{{ item.id }}" class="group block">
             <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
               <span class="font-medium text-doni-bark group-hover:text-doni-green transition">{{ item.title }}</span>
-              <time class="text-sm text-doni-bark-light/70 tabular-nums" datetime="{{ item.published_at.isoformat() }}">
+              <time class="text-sm text-doni-bark/50 tabular-nums" datetime="{{ item.published_at.isoformat() }}">
                 {{ item.published_at | format_datetime }}
               </time>
             </div>
-            <p class="text-sm text-doni-bark-light/80 mt-1.5 leading-relaxed">{{ item.content | excerpt(120) }}</p>
+            <p class="text-sm text-doni-bark/60 mt-1.5 leading-relaxed">{{ item.content | excerpt(120) }}</p>
           </a>
         </li>
         {% endfor %}
@@ -146,7 +142,7 @@
     <div class="card animate-fade-up">
       <p class="section-label">Новости</p>
       <h2 class="section-title !text-2xl mb-3">Публикации</h2>
-      <p class="text-doni-bark-light">Пока нет опубликованных новостей.</p>
+      <p class="text-doni-bark/70">Пока нет опубликованных новостей.</p>
     </div>
     {% endif %}
   </div>

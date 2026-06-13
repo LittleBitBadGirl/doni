@@ -5,7 +5,7 @@
   <div class="page-container-narrow">
     <h1 class="page-title animate-fade-up">Важно!</h1>
     <p class="page-lead animate-fade-up stagger-1">
-      Срочные объявления и важная информация для собственников ТСН «ДОНИ».
+      Важная информация для собственников ТСН «ДОНИ».
     </p>
 
     {% if news_items %}
@@ -14,7 +14,6 @@
       <article class="card border-l-4 border-l-doni-gold hover:shadow-card-hover transition animate-fade-up" style="animation-delay: {{ loop.index0 * 0.05 }}s">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <span class="badge-urgent mb-3">Срочно</span>
             <h2 class="font-display text-xl font-semibold text-doni-green-dark">
               <a href="/news/{{ item.id }}" class="hover:text-doni-green transition">
                 {{ item.title }}
