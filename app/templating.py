@@ -7,6 +7,7 @@ from zoneinfo import ZoneInfo
 from fastapi.templating import Jinja2Templates
 
 from app.config import get_settings
+from app.html_text import rich_text
 from app.models.document import DocumentCategory
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -99,6 +100,7 @@ templates.env.filters["format_datetime_long"] = format_datetime_long
 templates.env.filters["format_date"] = format_date
 templates.env.filters["format_money"] = format_money
 templates.env.filters["excerpt"] = excerpt
+templates.env.filters["rich_text"] = rich_text
 templates.env.filters["format_file_size"] = format_file_size
 templates.env.filters["phone_tel"] = phone_tel
 

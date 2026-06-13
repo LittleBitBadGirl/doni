@@ -225,6 +225,9 @@
           if (typeof window.doniSyncWysiwygEditors === "function") {
             window.doniSyncWysiwygEditors();
           }
+          if (typeof window.doniSyncPhonesEditors === "function") {
+            window.doniSyncPhonesEditors();
+          }
 
           const token = getCsrfToken();
           if (!token) {

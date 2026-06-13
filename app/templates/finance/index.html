@@ -32,7 +32,9 @@
 
     <div class="card mb-8 animate-fade-up stagger-3">
       <h2 class="font-display text-lg font-semibold text-doni-green-dark mb-4">Реквизиты для оплаты</h2>
-      <pre class="whitespace-pre-wrap text-sm text-doni-bark/90 font-sans leading-relaxed card-inset">{{ finance.bank_details }}</pre>
+      <div class="prose-doni text-sm text-doni-bark/90 card-inset">
+        {{ finance.bank_details | rich_text }}
+      </div>
     </div>
 
     <div class="card animate-fade-up stagger-4">

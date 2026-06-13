@@ -12,7 +12,7 @@ from wtforms import BooleanField, PasswordField
 from wtforms.validators import Length, Optional
 
 from app.admin_export import build_xlsx_response
-from app.admin_widgets import HTML_CONTENT_FORM_ARGS, HtmlEditorField
+from app.admin_widgets import PhonesEditorField, WYSIWYG_FORM_ARGS, WysiwygAdminMixin
 from app.admin_formatters import (
     format_admin_user,
     format_audit_action,
@@ -142,14 +142,8 @@ class AdminUserAdmin(DoniModelView, model=AdminUser):
             model.password_hash = hash_password(password)
 
 
-class HtmlContentAdminMixin:
-    """Визуальный редактор для полей HTML-контента (без ручных тегов)."""
-
-    form_overrides = {"content": HtmlEditorField}
-    form_args = {"content": HTML_CONTENT_FORM_ARGS}
-
-
-class NewsAdmin(HtmlContentAdminMixin, DoniModelView, model=News):
+class NewsAdmin(WysiwygAdminMixin, DoniModelView, model=News):
+    wysiwyg_fields = ("content",)
     name = "Новость"
     name_plural = "Новости"
     icon = "fa-solid fa-newspaper"
@@ -281,7 +275,8 @@ class DocumentAdmin(DoniModelView, model=Document):
         delete_stored_file(model.stored_filename)
 
 
-class FinanceInfoAdmin(DoniModelView, model=FinanceInfo):
+class FinanceInfoAdmin(WysiwygAdminMixin, DoniModelView, model=FinanceInfo):
+    wysiwyg_fields = ("bank_details",)
     name = "Финансы"
     name_plural = "Финансы"
     icon = "fa-solid fa-ruble-sign"
@@ -326,7 +321,14 @@ class FinanceInfoAdmin(DoniModelView, model=FinanceInfo):
         FinanceInfo.bank_details,
         FinanceInfo.is_current,
     ]
-    form_widget_args = {"bank_details": {"rows": 8}}
+    form_args = {
+        "bank_details": {
+            "description": (
+                "Реквизиты для оплаты взносов — оформите списком или абзацами. "
+                + WYSIWYG_FORM_ARGS["description"]
+            ),
+        },
+    }
 
     async def on_model_change(
         self,
@@ -353,7 +355,8 @@ class FinanceInfoAdmin(DoniModelView, model=FinanceInfo):
         delete_stored_file(model.debtors_filename)
 
 
-class InfrastructurePageAdmin(HtmlContentAdminMixin, DoniModelView, model=InfrastructurePage):
+class InfrastructurePageAdmin(WysiwygAdminMixin, DoniModelView, model=InfrastructurePage):
+    wysiwyg_fields = ("content",)
     name = "Инфраструктура"
     name_plural = "Инфраструктура"
     icon = "fa-solid fa-road"
@@ -402,8 +405,20 @@ class ContactInfoAdmin(DoniModelView, model=ContactInfo):
     column_formatters = {ContactInfo.updated_at: format_datetime_msk}
     column_formatters_detail = column_formatters
     form_columns = [ContactInfo.address, ContactInfo.phones, ContactInfo.map_embed_url]
+    form_overrides = {"phones": PhonesEditorField}
+    form_args = {
+        "address": {
+            "description": "Полный почтовый адрес правления — как для навигатора.",
+        },
+        "map_embed_url": {
+            "description": (
+                "Ссылка на карту из Яндекс.Карт: «Поделиться» → «Скопировать ссылку». "
+                "HTML-код вставлять не нужно."
+            ),
+        },
+    }
     form_widget_args = {
-        "phones": {"rows": 4},
+        "address": {"rows": 3},
         "map_embed_url": {"rows": 3},
     }
 
