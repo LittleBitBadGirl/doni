@@ -4,11 +4,15 @@
 
 @layer base {
   :root {
-    --doni-green: #2d6a4f;
-    --doni-green-dark: #1b4332;
-    --doni-gold: #c9a227;
-    --doni-sand: #f4f1de;
-    --doni-parchment: #faf7f0;
+    --doni-green: #1e4d3d;
+    --doni-green-dark: #0c2920;
+    --doni-green-light: #2f6b56;
+    --doni-gold: #b8922f;
+    --doni-gold-light: #d4b85a;
+    --doni-sand: #ece6d9;
+    --doni-parchment: #f9f6ef;
+    --doni-cream: #fffdf8;
+    --doni-bark: #3d3228;
   }
 
   html {
@@ -17,38 +21,47 @@
 
   body {
     @apply bg-doni-sand text-doni-bark antialiased font-sans;
-    background-image: theme("backgroundImage.hero-mesh"), theme("backgroundImage.grain");
+    background-image: theme("backgroundImage.hero-mesh"), theme("backgroundImage.linen"),
+      theme("backgroundImage.grain");
     background-attachment: fixed;
   }
 
   ::selection {
-    @apply bg-doni-green/20 text-doni-green-dark;
+    @apply bg-doni-gold/25 text-doni-green-dark;
   }
 }
 
 @layer components {
+  /* ── Header ── */
   .site-header {
-    @apply bg-gradient-to-br from-doni-green-dark via-doni-green to-doni-green-dark text-white shadow-header;
-    background-image:
-      linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #1b4332 100%),
-      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    @apply sticky top-0 z-40 bg-doni-green-dark text-white shadow-header border-b border-doni-gold/30;
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.08) 100%
+    );
   }
 
   .site-logo {
-    @apply font-display text-xl font-semibold tracking-tight hover:opacity-90 transition;
+    @apply font-display text-[1.35rem] font-semibold tracking-tight hover:opacity-90 transition;
+  }
+
+  .site-logo-mark {
+    @apply flex h-11 w-11 items-center justify-center rounded-lg bg-doni-gold/15 border border-doni-gold/40 font-display text-xl font-bold text-doni-gold-light shadow-inset transition group-hover:bg-doni-gold/25 group-hover:border-doni-gold/60;
   }
 
   .site-logo-sub {
-    @apply block text-[0.65rem] font-sans font-normal uppercase tracking-[0.2em] text-white/60 mt-0.5;
+    @apply block text-[0.6rem] font-sans font-medium uppercase tracking-[0.22em] text-doni-gold-light/70 mt-1;
   }
 
   .nav-link {
-    @apply relative px-1 py-1 text-sm font-medium text-white/85 hover:text-white transition;
+    @apply relative px-1 py-1 text-sm font-medium text-white/75 hover:text-white transition tracking-wide;
   }
 
   .nav-link::after {
     content: "";
-    @apply absolute bottom-0 left-0 h-0.5 w-0 bg-doni-gold transition-all duration-300;
+    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-doni-gold transition-all duration-300;
   }
 
   .nav-link:hover::after {
@@ -56,35 +69,60 @@
   }
 
   .nav-link-search {
-    @apply inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-white/20 transition backdrop-blur-sm border border-white/10;
+    @apply inline-flex items-center gap-1.5 rounded-md border border-doni-gold/30 bg-doni-gold/10 px-3.5 py-1.5 text-sm font-medium text-doni-gold-light hover:bg-doni-gold/20 hover:border-doni-gold/50 transition;
   }
 
+  .mobile-nav-link {
+    @apply rounded-lg border border-transparent px-3 py-2.5 text-sm font-medium text-white/85 transition hover:border-doni-gold/20 hover:bg-white/5;
+  }
+
+  .mobile-nav-link-accent {
+    @apply mobile-nav-link col-span-2 border-doni-gold/25 bg-doni-gold/10 text-center text-doni-gold-light hover:bg-doni-gold/15;
+  }
+
+  /* ── Buttons ── */
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg bg-doni-green px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-doni-green-dark hover:shadow-md active:scale-[0.98];
+    @apply inline-flex items-center justify-center rounded-md bg-doni-green-dark px-6 py-3 text-sm font-semibold text-white shadow-sm transition duration-200 hover:bg-doni-green hover:shadow-md active:scale-[0.98] border border-doni-green-dark hover:border-doni-green;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-lg border-2 border-doni-green px-5 py-2.5 text-sm font-medium text-doni-green transition hover:bg-doni-green hover:text-white active:scale-[0.98];
+    @apply inline-flex items-center justify-center rounded-md border border-doni-green/30 bg-doni-cream/60 px-6 py-3 text-sm font-semibold text-doni-green-dark transition duration-200 hover:border-doni-green hover:bg-doni-green hover:text-white active:scale-[0.98];
   }
 
   .btn-ghost {
-    @apply inline-flex items-center rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-doni-bark transition hover:border-doni-green hover:text-doni-green;
+    @apply inline-flex items-center rounded-md border border-doni-green/15 bg-doni-cream/80 px-4 py-2 text-sm font-medium text-doni-bark transition hover:border-doni-green/40 hover:text-doni-green;
   }
 
+  /* ── Cards ── */
   .card {
-    @apply rounded-2xl border border-doni-green/10 bg-doni-parchment p-6 shadow-card transition;
+    @apply rounded-xl border border-doni-green/10 bg-doni-cream/90 p-6 shadow-card backdrop-blur-sm transition;
+    background-image: linear-gradient(
+      160deg,
+      rgba(255, 253, 248, 0.98) 0%,
+      rgba(249, 246, 239, 0.92) 100%
+    );
   }
 
   .card-hover {
-    @apply card hover:shadow-card-hover hover:-translate-y-0.5 hover:border-doni-green/20;
+    @apply card hover:shadow-card-hover hover:-translate-y-1 hover:border-doni-gold/25;
   }
 
   .card-inset {
-    @apply rounded-xl bg-white/60 border border-doni-green/5 p-4;
+    @apply rounded-lg border border-doni-green/10 bg-doni-parchment/80 p-4 shadow-inset;
   }
 
+  .panel-accent {
+    @apply card relative overflow-hidden pl-7 border-doni-gold/20;
+  }
+
+  .panel-accent::before {
+    content: "";
+    @apply absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-doni-gold via-doni-gold/70 to-doni-gold/30;
+  }
+
+  /* ── Layout ── */
   .page-section {
-    @apply py-12 md:py-16;
+    @apply py-12 md:py-16 lg:py-20;
   }
 
   .page-container {
@@ -95,68 +133,142 @@
     @apply mx-auto max-w-4xl px-4 md:px-6 lg:px-8;
   }
 
+  .hero-band {
+    @apply relative;
+  }
+
+  .hero-band::after {
+    content: "";
+    @apply absolute inset-x-4 md:inset-x-6 lg:inset-x-8 bottom-0 h-px bg-gold-line pointer-events-none;
+  }
+
   .page-title {
-    @apply font-display text-3xl md:text-4xl font-semibold text-doni-green-dark tracking-tight;
+    @apply font-display text-4xl md:text-5xl font-semibold text-doni-green-dark tracking-tight leading-none;
+  }
+
+  .page-title::after {
+    content: "";
+    @apply block w-14 h-0.5 bg-doni-gold mt-5;
   }
 
   .page-lead {
-    @apply mt-3 text-lg text-doni-bark/80 leading-relaxed max-w-2xl;
+    @apply mt-5 text-lg text-doni-bark/75 leading-relaxed max-w-2xl font-display italic;
+  }
+
+  .section-label {
+    @apply text-[0.65rem] font-sans font-semibold uppercase tracking-[0.24em] text-doni-gold-dark mb-2;
+  }
+
+  .section-title {
+    @apply font-display text-2xl md:text-3xl font-semibold text-doni-green-dark tracking-tight;
   }
 
   .breadcrumb {
-    @apply flex flex-wrap items-center gap-2 text-sm text-doni-bark/60 mb-6;
+    @apply flex flex-wrap items-center gap-2 text-sm text-doni-bark-light mb-6;
   }
 
   .breadcrumb a {
     @apply hover:text-doni-green transition;
   }
 
+  /* ── Badges & pills ── */
   .badge-urgent {
-    @apply inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-amber-900 border border-amber-200/80;
+    @apply inline-flex items-center gap-1.5 rounded-sm bg-doni-amber/10 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-doni-amber border border-doni-amber/25;
+  }
+
+  .badge-urgent::before {
+    content: "";
+    @apply h-1.5 w-1.5 rounded-full bg-doni-amber animate-pulse;
   }
 
   .badge-muted {
-    @apply inline-flex items-center rounded-full bg-doni-mist px-2.5 py-0.5 text-xs font-medium text-doni-green-dark;
+    @apply inline-flex items-center rounded-sm bg-doni-mist px-2.5 py-1 text-xs font-medium text-doni-green-dark border border-doni-green/10;
   }
 
   .nav-pill {
-    @apply rounded-full px-4 py-1.5 text-sm font-medium transition border;
+    @apply rounded-md px-4 py-2 text-sm font-medium transition border;
   }
 
   .nav-pill-active {
-    @apply nav-pill bg-doni-green text-white border-doni-green shadow-sm;
+    @apply nav-pill bg-doni-green-dark text-white border-doni-green-dark shadow-sm;
   }
 
   .nav-pill-inactive {
-    @apply nav-pill bg-white/80 border-doni-green/15 text-doni-bark hover:border-doni-green/40 hover:bg-white;
+    @apply nav-pill bg-doni-cream/80 border-doni-green/15 text-doni-bark hover:border-doni-green/30 hover:bg-white;
   }
 
+  /* ── Stats ── */
   .stat-card {
     @apply card relative overflow-hidden;
   }
 
   .stat-card::before {
     content: "";
-    @apply absolute top-0 right-0 w-24 h-24 bg-doni-green/5 rounded-full -translate-y-1/2 translate-x-1/2;
+    @apply absolute top-0 right-0 w-28 h-28 bg-doni-gold/10 rounded-full -translate-y-1/2 translate-x-1/3;
+  }
+
+  .stat-card::after {
+    content: "";
+    @apply absolute bottom-0 left-0 w-full h-px bg-gold-line;
   }
 
   .stat-value {
-    @apply font-display text-3xl md:text-4xl font-semibold text-doni-green-dark;
+    @apply font-display text-4xl md:text-5xl font-semibold text-doni-green-dark tabular-nums;
   }
 
+  /* ── Links ── */
   .link-arrow {
-    @apply inline-flex items-center gap-1 text-sm font-medium text-doni-green hover:text-doni-green-dark transition;
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-doni-green hover:text-doni-gold-dark transition tracking-wide;
   }
 
   .link-arrow::after {
     content: "→";
-    @apply inline-block transition-transform;
+    @apply inline-block transition-transform text-doni-gold;
   }
 
   .link-arrow:hover::after {
-    transform: translateX(2px);
+    transform: translateX(3px);
   }
 
+  .quick-link {
+    @apply flex items-center justify-between py-2.5 border-b border-doni-green/10 last:border-0 transition;
+  }
+
+  .quick-link span:first-child {
+    @apply text-doni-bark transition font-medium;
+  }
+
+  .quick-link:hover span:first-child {
+    @apply text-doni-green-dark;
+  }
+
+  .quick-link span:last-child {
+    @apply text-doni-gold opacity-0 -translate-x-1 transition-all duration-200;
+  }
+
+  .quick-link:hover span:last-child {
+    @apply opacity-100 translate-x-0;
+  }
+
+  /* ── Hero helpers ── */
+  .location-badge {
+    @apply inline-flex items-center gap-2 rounded-sm bg-doni-green-dark/10 px-3 py-1.5 text-[0.65rem] sm:text-xs font-semibold uppercase tracking-[0.18em] sm:tracking-[0.22em] text-doni-green-dark mb-6 border border-doni-green/10 whitespace-nowrap max-w-full overflow-x-auto;
+  }
+
+  .hero-actions {
+    @apply mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    @apply w-full sm:w-auto justify-center;
+  }
+
+  .section-header {
+    @apply flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between mb-6 pb-4 border-b border-doni-green/10;
+  }
+
+  /* ── Prose ── */
   .prose-doni {
     @apply text-doni-bark/90 leading-relaxed;
   }
@@ -187,24 +299,78 @@
   }
 
   .prose-doni a {
-    @apply text-doni-green underline decoration-doni-green/30 hover:decoration-doni-green transition;
+    @apply text-doni-green underline decoration-doni-gold/40 hover:decoration-doni-gold transition;
   }
 
+  /* ── Forms ── */
   .input-field {
-    @apply w-full rounded-xl border border-doni-green/20 bg-white px-4 py-2.5 text-sm text-doni-bark placeholder:text-doni-bark/40 focus:border-doni-green focus:outline-none focus:ring-2 focus:ring-doni-green/20 transition;
+    @apply w-full rounded-lg border border-doni-green/15 bg-doni-cream px-4 py-3 text-sm text-doni-bark placeholder:text-doni-bark-light/50 focus:border-doni-green focus:outline-none focus:ring-2 focus:ring-doni-green/15 transition shadow-inset;
   }
 
+  /* ── Footer ── */
   .site-footer {
-    @apply border-t border-doni-green/10 bg-doni-parchment/90 backdrop-blur-sm mt-auto;
+    @apply bg-doni-green-dark text-white/75 mt-auto border-t border-doni-gold/30;
+    background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.12) 0%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
   }
 
+  .footer-heading {
+    @apply font-display text-xl font-semibold text-white;
+  }
+
+  .footer-label {
+    @apply text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-doni-gold-light/60 mb-3;
+  }
+
+  .footer-link {
+    @apply text-white/70 hover:text-doni-gold-light transition;
+  }
+
+  /* ── Feature cards ── */
   .feature-icon {
-    @apply flex h-11 w-11 items-center justify-center rounded-xl bg-doni-green/10 text-doni-green;
+    @apply flex h-12 w-12 items-center justify-center rounded-lg bg-doni-green-dark/10 text-doni-green border border-doni-green/10 transition duration-300;
   }
 
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
-  .stagger-5 { animation-delay: 0.5s; }
+  .card-hover:hover .feature-icon {
+    @apply bg-doni-green-dark text-doni-gold-light border-doni-gold/30;
+  }
+
+  .feature-card-title {
+    @apply font-display text-xl font-semibold text-doni-green-dark mb-2 transition;
+  }
+
+  .card-hover:hover .feature-card-title {
+    @apply text-doni-green;
+  }
+
+  /* ── Announcement cards ── */
+  .announcement-card {
+    @apply card border-l-[3px] border-l-doni-gold hover:shadow-card-hover transition;
+  }
+
+  /* ── Cookie banner ── */
+  .cookie-banner {
+    @apply fixed bottom-0 left-0 right-0 z-50 border-t border-doni-gold/25 bg-doni-green-dark/95 backdrop-blur-md p-4 shadow-header text-white/85;
+  }
+
+  /* ── Animation stagger ── */
+  .stagger-1 {
+    animation-delay: 0.08s;
+  }
+  .stagger-2 {
+    animation-delay: 0.16s;
+  }
+  .stagger-3 {
+    animation-delay: 0.24s;
+  }
+  .stagger-4 {
+    animation-delay: 0.32s;
+  }
+  .stagger-5 {
+    animation-delay: 0.4s;
+  }
 }

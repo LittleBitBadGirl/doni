@@ -1,49 +1,48 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="page-section pb-8">
+<section class="hero-band page-section pb-10 md:pb-14">
   <div class="page-container">
-    <div class="relative grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8 items-end mb-14 md:mb-16">
+    <div class="relative grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10 items-end mb-16 md:mb-20">
       <div class="lg:col-span-7 animate-fade-up">
-        <p class="inline-flex items-center gap-2 rounded-full bg-doni-green/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-doni-green-dark mb-5 border border-doni-green/15">
-          <span class="h-1.5 w-1.5 rounded-full bg-doni-gold"></span>
+        <p class="location-badge">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-doni-gold"></span>
           Пушкинский район · Санкт-Петербург
         </p>
-        <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-doni-green-dark leading-[1.1] tracking-tight">
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-semibold text-doni-green-dark leading-[1.05] tracking-tight">
           ТСН «ДОНИ»
         </h1>
-        <p class="page-lead mt-5">
+        <div class="mt-6 w-20 h-0.5 bg-doni-gold"></div>
+        <p class="page-lead mt-6">
           Официальный информационный портал товарищества собственников недвижимости —
           новости, финансы, документы и статус инфраструктуры поселка.
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
+        <div class="hero-actions">
           <a href="/finance" class="btn-primary">Взносы и реквизиты</a>
           <a href="/news/important" class="btn-secondary">Важно!</a>
           <a href="/news" class="btn-secondary">Все новости</a>
         </div>
       </div>
       <div class="lg:col-span-5 animate-fade-up stagger-2">
-        <div class="card relative overflow-hidden border-doni-gold/20">
-          <div class="absolute -top-8 -right-8 h-32 w-32 rounded-full bg-doni-gold/10"></div>
-          <div class="absolute -bottom-4 -left-4 h-20 w-20 rounded-full bg-doni-green/10"></div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-doni-bark/50 mb-3">Быстрый доступ</p>
-          <ul class="space-y-3 relative">
+        <div class="panel-accent">
+          <p class="section-label">Быстрый доступ</p>
+          <ul class="mt-1">
             <li>
-              <a href="/documents/assembly" class="flex items-center justify-between group py-1">
-                <span class="text-doni-bark group-hover:text-doni-green transition">Материалы собраний</span>
-                <span class="text-doni-gold opacity-0 group-hover:opacity-100 transition">→</span>
+              <a href="/documents/assembly" class="quick-link">
+                <span>Материалы собраний</span>
+                <span>→</span>
               </a>
             </li>
             <li>
-              <a href="/infrastructure/gas" class="flex items-center justify-between group py-1">
-                <span class="text-doni-bark group-hover:text-doni-green transition">Газификация</span>
-                <span class="text-doni-gold opacity-0 group-hover:opacity-100 transition">→</span>
+              <a href="/infrastructure/gas" class="quick-link">
+                <span>Газификация</span>
+                <span>→</span>
               </a>
             </li>
             <li>
-              <a href="/contacts" class="flex items-center justify-between group py-1">
-                <span class="text-doni-bark group-hover:text-doni-green transition">Контакты правления</span>
-                <span class="text-doni-gold opacity-0 group-hover:opacity-100 transition">→</span>
+              <a href="/contacts" class="quick-link">
+                <span>Контакты правления</span>
+                <span>→</span>
               </a>
             </li>
           </ul>
@@ -51,56 +50,64 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-14 md:mb-16">
+    <div class="mb-8 animate-fade-up stagger-1">
+      <p class="section-label">Разделы портала</p>
+      <h2 class="section-title">Всё необходимое собственнику</h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-16 md:mb-20">
       <a href="/news" class="card-hover group animate-fade-up stagger-1">
-        <div class="feature-icon mb-4 group-hover:bg-doni-green group-hover:text-white transition">
+        <div class="feature-icon mb-5">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
           </svg>
         </div>
-        <h2 class="font-display text-xl font-semibold text-doni-green-dark mb-2">Новости</h2>
-        <p class="text-sm text-doni-bark/70 leading-relaxed">Оперативные объявления и архив публикаций правления</p>
+        <h2 class="feature-card-title">Новости</h2>
+        <p class="text-sm text-doni-bark-light leading-relaxed">Оперативные объявления и архив публикаций правления</p>
       </a>
       <a href="/finance" class="card-hover group animate-fade-up stagger-2">
-        <div class="feature-icon mb-4 group-hover:bg-doni-green group-hover:text-white transition">
+        <div class="feature-icon mb-5">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <h2 class="font-display text-xl font-semibold text-doni-green-dark mb-2">Финансы</h2>
-        <p class="text-sm text-doni-bark/70 leading-relaxed">Взносы, реквизиты и информация о задолженностях</p>
+        <h2 class="feature-card-title">Финансы</h2>
+        <p class="text-sm text-doni-bark-light leading-relaxed">Взносы, реквизиты и информация о задолженностях</p>
       </a>
       <a href="/documents" class="card-hover group animate-fade-up stagger-3 sm:col-span-2 lg:col-span-1">
-        <div class="feature-icon mb-4 group-hover:bg-doni-green group-hover:text-white transition">
+        <div class="feature-icon mb-5">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
         </div>
-        <h2 class="font-display text-xl font-semibold text-doni-green-dark mb-2">Документы</h2>
-        <p class="text-sm text-doni-bark/70 leading-relaxed">Устав, протоколы собраний и отчётность</p>
+        <h2 class="feature-card-title">Документы</h2>
+        <p class="text-sm text-doni-bark-light leading-relaxed">Устав, протоколы собраний и отчётность</p>
       </a>
     </div>
 
     {% if pinned_news %}
-    <div class="mb-12 animate-fade-up stagger-3">
-      <div class="flex items-end justify-between mb-5">
-        <h2 class="font-display text-2xl font-semibold text-doni-green-dark">Важные объявления</h2>
-        <a href="/news/important" class="link-arrow">Раздел «Важно!»</a>
+    <div class="mb-14 animate-fade-up stagger-3">
+      <div class="section-header !border-0 !pb-0 mb-6">
+        <div>
+          <p class="section-label">Срочное</p>
+          <h2 class="section-title">Важные объявления</h2>
+        </div>
+        <a href="/news/important" class="link-arrow shrink-0">Раздел «Важно!»</a>
       </div>
       <div class="space-y-4">
         {% for item in pinned_news %}
-        <article class="card border-l-4 border-l-doni-gold hover:shadow-card-hover transition">
+        <article class="announcement-card">
           <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <span class="badge-urgent mb-3">Срочно</span>
-              <h3 class="font-display text-lg font-semibold text-doni-green-dark">
+              <h3 class="font-display text-xl font-semibold text-doni-green-dark">
                 <a href="/news/{{ item.id }}" class="hover:text-doni-green transition">
                   {{ item.title }}
                 </a>
               </h3>
-              <p class="text-sm text-doni-bark/70 mt-2 leading-relaxed">{{ item.content | excerpt(180) }}</p>
+              <p class="text-sm text-doni-bark-light mt-2 leading-relaxed">{{ item.content | excerpt(180) }}</p>
             </div>
-            <time class="text-sm text-doni-bark/50 shrink-0 font-medium" datetime="{{ item.published_at.isoformat() }}">
+            <time class="text-sm text-doni-bark-light/70 shrink-0 font-medium tabular-nums" datetime="{{ item.published_at.isoformat() }}">
               {{ item.published_at | format_datetime }}
             </time>
           </div>
@@ -112,21 +119,24 @@
 
     {% if recent_news %}
     <div class="card animate-fade-up stagger-4">
-      <div class="flex items-center justify-between mb-5 pb-4 border-b border-doni-green/10">
-        <h2 class="font-display text-2xl font-semibold text-doni-green-dark">Последние новости</h2>
-        <a href="/news" class="link-arrow">Все новости</a>
+      <div class="section-header sm:items-center">
+        <div>
+          <p class="section-label">Архив</p>
+          <h2 class="section-title !text-2xl">Последние новости</h2>
+        </div>
+        <a href="/news" class="link-arrow shrink-0">Все новости</a>
       </div>
-      <ul class="divide-y divide-doni-green/8">
+      <ul class="divide-y divide-doni-green/10">
         {% for item in recent_news %}
         <li class="py-4 first:pt-0 last:pb-0">
           <a href="/news/{{ item.id }}" class="group block">
             <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
               <span class="font-medium text-doni-bark group-hover:text-doni-green transition">{{ item.title }}</span>
-              <time class="text-sm text-doni-bark/50" datetime="{{ item.published_at.isoformat() }}">
+              <time class="text-sm text-doni-bark-light/70 tabular-nums" datetime="{{ item.published_at.isoformat() }}">
                 {{ item.published_at | format_datetime }}
               </time>
             </div>
-            <p class="text-sm text-doni-bark/60 mt-1.5 leading-relaxed">{{ item.content | excerpt(120) }}</p>
+            <p class="text-sm text-doni-bark-light/80 mt-1.5 leading-relaxed">{{ item.content | excerpt(120) }}</p>
           </a>
         </li>
         {% endfor %}
@@ -134,8 +144,9 @@
     </div>
     {% elif not pinned_news %}
     <div class="card animate-fade-up">
-      <h2 class="font-display text-2xl font-semibold text-doni-green-dark mb-3">Новости</h2>
-      <p class="text-doni-bark/70">Пока нет опубликованных новостей.</p>
+      <p class="section-label">Новости</p>
+      <h2 class="section-title !text-2xl mb-3">Публикации</h2>
+      <p class="text-doni-bark-light">Пока нет опубликованных новостей.</p>
     </div>
     {% endif %}
   </div>
