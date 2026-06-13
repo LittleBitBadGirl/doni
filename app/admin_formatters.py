@@ -32,6 +32,8 @@ MONTHS_GENITIVE = (
 NEWS_SOURCE_LABELS = {
     NewsSource.admin: "Правление",
     NewsSource.telegram_inlet: "Telegram",
+    "admin": "Правление",
+    "telegram_inlet": "Telegram",
 }
 
 DOCUMENT_CATEGORY_LABELS = {
@@ -41,6 +43,12 @@ DOCUMENT_CATEGORY_LABELS = {
     DocumentCategory.regulation: "Регламент",
     DocumentCategory.assembly: "Собрание",
     DocumentCategory.other: "Прочее",
+    "charter": "Устав",
+    "protocol": "Протокол",
+    "finance": "Финансы",
+    "regulation": "Регламент",
+    "assembly": "Собрание",
+    "other": "Прочее",
 }
 
 AUDIT_ACTION_LABELS = {
@@ -49,6 +57,11 @@ AUDIT_ACTION_LABELS = {
     AuditAction.news_published: "Публикация новости",
     AuditAction.finance_updated: "Обновление финансов",
     AuditAction.admin_action: "Действие администратора",
+    "admin_login": "Вход в систему",
+    "document_uploaded": "Загрузка документа",
+    "news_published": "Публикация новости",
+    "finance_updated": "Обновление финансов",
+    "admin_action": "Действие администратора",
 }
 
 INFRA_SLUG_LABELS = {
@@ -59,6 +72,14 @@ INFRA_SLUG_LABELS = {
 }
 
 
+def _prop_key(attribute: Any) -> str:
+    return attribute.key if hasattr(attribute, "key") else str(attribute)
+
+
+def _prop_value(model: Any, attribute: Any) -> Any:
+    return getattr(model, _prop_key(attribute), None)
+
+
 def _enum_label(value: Any, labels: dict[Any, str]) -> str:
     if value is None:
         return "—"
@@ -67,7 +88,7 @@ def _enum_label(value: Any, labels: dict[Any, str]) -> str:
 
 
 def format_datetime_msk(model: Any, attribute: Any) -> str:
-    value = getattr(model, attribute.key, None)
+    value = _prop_value(model, attribute)
     if value is None:
         return "—"
     if isinstance(value, date) and not isinstance(value, datetime):
@@ -82,33 +103,33 @@ def format_datetime_msk(model: Any, attribute: Any) -> str:
 
 
 def format_admin_user(model: Any, attribute: Any) -> str:
-    user = getattr(model, attribute.key, None)
+    user = _prop_value(model, attribute)
     if user is None:
         return "—"
     return user.full_name
 
 
 def format_news_source(model: Any, attribute: Any) -> str:
-    return _enum_label(getattr(model, attribute.key, None), NEWS_SOURCE_LABELS)
+    return _enum_label(_prop_value(model, attribute), NEWS_SOURCE_LABELS)
 
 
 def format_document_category(model: Any, attribute: Any) -> str:
-    return _enum_label(getattr(model, attribute.key, None), DOCUMENT_CATEGORY_LABELS)
+    return _enum_label(_prop_value(model, attribute), DOCUMENT_CATEGORY_LABELS)
 
 
 def format_audit_action(model: Any, attribute: Any) -> str:
-    return _enum_label(getattr(model, attribute.key, None), AUDIT_ACTION_LABELS)
+    return _enum_label(_prop_value(model, attribute), AUDIT_ACTION_LABELS)
 
 
 def format_infra_slug(model: Any, attribute: Any) -> str:
-    slug = getattr(model, attribute.key, None)
+    slug = _prop_value(model, attribute)
     if not slug:
         return "—"
     return INFRA_SLUG_LABELS.get(slug, slug)
 
 
 def format_file_size(model: Any, attribute: Any) -> str:
-    size = getattr(model, attribute.key, None)
+    size = _prop_value(model, attribute)
     if size is None:
         return "—"
     if size < 1024:
@@ -119,7 +140,7 @@ def format_file_size(model: Any, attribute: Any) -> str:
 
 
 def format_rubles(model: Any, attribute: Any) -> str:
-    value = getattr(model, attribute.key, None)
+    value = _prop_value(model, attribute)
     if value is None:
         return "—"
     amount = Decimal(value)
