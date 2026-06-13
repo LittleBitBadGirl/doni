@@ -42,6 +42,14 @@
     @apply block text-[0.65rem] font-sans font-normal uppercase tracking-[0.2em] text-white/60 mt-0.5;
   }
 
+  .site-logo-mark {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-doni-gold/40 bg-doni-gold/15 font-display text-xl font-bold text-doni-gold transition group-hover:border-doni-gold/60 group-hover:bg-doni-gold/25;
+  }
+
+  .site-logo-mark-light {
+    @apply inline-flex h-14 w-14 items-center justify-center rounded-lg border border-doni-gold/30 bg-doni-gold/10 font-display text-2xl font-bold text-doni-green-dark;
+  }
+
   .nav-link {
     @apply relative px-1 py-1 text-sm font-medium text-white/85 hover:text-white transition;
   }
