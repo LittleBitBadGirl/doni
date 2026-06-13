@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+  <div class="page-container">
+    <nav class="breadcrumb">
+      <a href="/documents">Документы</a>
+      <span>/</span>
+      <span class="text-doni-bark/80">Архив собраний</span>
+    </nav>
+
+    <h1 class="page-title animate-fade-up">Архив собраний</h1>
+    <p class="page-lead animate-fade-up stagger-1">Материалы общих собраний собственников по годам.</p>
+
+    {% if years %}
+    <div class="flex flex-wrap gap-2 mb-8 mt-8">
+      <a href="/documents/assembly"
+         class="{% if not active_year %}nav-pill-active{% else %}nav-pill-inactive{% endif %}">
+        Все годы
+      </a>
+      {% for y in years %}
+      <a href="/documents/assembly?year={{ y }}"
+         class="{% if active_year == y %}nav-pill-active{% else %}nav-pill-inactive{% endif %}">
+        {{ y }}
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if documents_by_year %}
+    <div class="space-y-10">
+      {% for year, docs in documents_by_year.items() %}
+      <div>
+        <h2 class="font-display text-xl font-semibold text-doni-green-dark mb-4 flex items-center gap-3">
+          <span class="h-px flex-1 bg-doni-green/15 max-w-12"></span>
+          {% if year %}{{ year }} год{% else %}Без указания года{% endif %}
+        </h2>
+        <div class="card overflow-hidden p-0">
+          <ul class="divide-y divide-doni-green/8">
+            {% for doc in docs %}
+            <li class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between hover:bg-doni-mist/40 transition">
+              <div>
+                <p class="font-medium text-doni-green-dark">{{ doc.title }}</p>
+                <p class="text-sm text-doni-bark/50 mt-1">{{ doc.file_size_bytes | format_file_size }}</p>
+              </div>
+              <a href="/files/{{ doc.id }}" class="btn-secondary shrink-0 text-xs py-2 px-4">
+                Скачать
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="card mt-8">
+      <p class="text-doni-bark/70">
+        {% if active_year %}
+        Материалы за {{ active_year }} год пока не опубликованы.
+        {% else %}
+        Архив собраний пока пуст.
+        {% endif %}
+      </p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

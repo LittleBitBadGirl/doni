@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --doni-green: #2d6a4f;
+    --doni-green-dark: #1b4332;
+    --doni-gold: #c9a227;
+    --doni-sand: #f4f1de;
+    --doni-parchment: #faf7f0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-doni-sand text-doni-bark antialiased font-sans;
+    background-image: theme("backgroundImage.hero-mesh"), theme("backgroundImage.grain");
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-doni-green/20 text-doni-green-dark;
+  }
+}
+
+@layer components {
+  .site-header {
+    @apply bg-gradient-to-br from-doni-green-dark via-doni-green to-doni-green-dark text-white shadow-header;
+    background-image:
+      linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #1b4332 100%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .site-logo {
+    @apply font-display text-xl font-semibold tracking-tight hover:opacity-90 transition;
+  }
+
+  .site-logo-sub {
+    @apply block text-[0.65rem] font-sans font-normal uppercase tracking-[0.2em] text-white/60 mt-0.5;
+  }
+
+  .nav-link {
+    @apply relative px-1 py-1 text-sm font-medium text-white/85 hover:text-white transition;
+  }
+
+  .nav-link::after {
+    content: "";
+    @apply absolute bottom-0 left-0 h-0.5 w-0 bg-doni-gold transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .nav-link-search {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-white/20 transition backdrop-blur-sm border border-white/10;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-doni-green px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-doni-green-dark hover:shadow-md active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border-2 border-doni-green px-5 py-2.5 text-sm font-medium text-doni-green transition hover:bg-doni-green hover:text-white active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-doni-bark transition hover:border-doni-green hover:text-doni-green;
+  }
+
+  .card {
+    @apply rounded-2xl border border-doni-green/10 bg-doni-parchment p-6 shadow-card transition;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-card-hover hover:-translate-y-0.5 hover:border-doni-green/20;
+  }
+
+  .card-inset {
+    @apply rounded-xl bg-white/60 border border-doni-green/5 p-4;
+  }
+
+  .page-section {
+    @apply py-12 md:py-16;
+  }
+
+  .page-container {
+    @apply mx-auto max-w-7xl px-4 md:px-6 lg:px-8;
+  }
+
+  .page-container-narrow {
+    @apply mx-auto max-w-4xl px-4 md:px-6 lg:px-8;
+  }
+
+  .page-title {
+    @apply font-display text-3xl md:text-4xl font-semibold text-doni-green-dark tracking-tight;
+  }
+
+  .page-lead {
+    @apply mt-3 text-lg text-doni-bark/80 leading-relaxed max-w-2xl;
+  }
+
+  .breadcrumb {
+    @apply flex flex-wrap items-center gap-2 text-sm text-doni-bark/60 mb-6;
+  }
+
+  .breadcrumb a {
+    @apply hover:text-doni-green transition;
+  }
+
+  .badge-urgent {
+    @apply inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-amber-900 border border-amber-200/80;
+  }
+
+  .badge-muted {
+    @apply inline-flex items-center rounded-full bg-doni-mist px-2.5 py-0.5 text-xs font-medium text-doni-green-dark;
+  }
+
+  .nav-pill {
+    @apply rounded-full px-4 py-1.5 text-sm font-medium transition border;
+  }
+
+  .nav-pill-active {
+    @apply nav-pill bg-doni-green text-white border-doni-green shadow-sm;
+  }
+
+  .nav-pill-inactive {
+    @apply nav-pill bg-white/80 border-doni-green/15 text-doni-bark hover:border-doni-green/40 hover:bg-white;
+  }
+
+  .stat-card {
+    @apply card relative overflow-hidden;
+  }
+
+  .stat-card::before {
+    content: "";
+    @apply absolute top-0 right-0 w-24 h-24 bg-doni-green/5 rounded-full -translate-y-1/2 translate-x-1/2;
+  }
+
+  .stat-value {
+    @apply font-display text-3xl md:text-4xl font-semibold text-doni-green-dark;
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-1 text-sm font-medium text-doni-green hover:text-doni-green-dark transition;
+  }
+
+  .link-arrow::after {
+    content: "→";
+    @apply inline-block transition-transform;
+  }
+
+  .link-arrow:hover::after {
+    transform: translateX(2px);
+  }
+
+  .prose-doni {
+    @apply text-doni-bark/90 leading-relaxed;
+  }
+
+  .prose-doni h2 {
+    @apply font-display text-xl font-semibold text-doni-green-dark mt-8 mb-3;
+  }
+
+  .prose-doni h3 {
+    @apply font-display text-lg font-semibold text-doni-green-dark mt-6 mb-2;
+  }
+
+  .prose-doni p {
+    @apply mb-4;
+  }
+
+  .prose-doni ul,
+  .prose-doni ol {
+    @apply mb-4 pl-5 space-y-1;
+  }
+
+  .prose-doni ul {
+    @apply list-disc;
+  }
+
+  .prose-doni ol {
+    @apply list-decimal;
+  }
+
+  .prose-doni a {
+    @apply text-doni-green underline decoration-doni-green/30 hover:decoration-doni-green transition;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-doni-green/20 bg-white px-4 py-2.5 text-sm text-doni-bark placeholder:text-doni-bark/40 focus:border-doni-green focus:outline-none focus:ring-2 focus:ring-doni-green/20 transition;
+  }
+
+  .site-footer {
+    @apply border-t border-doni-green/10 bg-doni-parchment/90 backdrop-blur-sm mt-auto;
+  }
+
+  .feature-icon {
+    @apply flex h-11 w-11 items-center justify-center rounded-xl bg-doni-green/10 text-doni-green;
+  }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+}
