@@ -105,7 +105,6 @@ app.add_middleware(
     cookie_samesite="strict",
     sensitive_cookies={"admin_token"},
     required_urls=[
-        re.compile(r"^/admin/login$"),
         re.compile(r"^/documents/upload$"),
         re.compile(r"^/finance/debtors/upload$"),
     ],
