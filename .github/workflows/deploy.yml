@@ -20,5 +20,10 @@ jobs:
             ./venv/bin/pip install -r requirements.txt -q
             ./venv/bin/alembic upgrade head
             systemctl restart doni
-            sleep 2
-            curl -s http://localhost:8765/health
+            for i in 1 2 3 4 5; do
+              sleep 2
+              curl -sf http://localhost:8765/health && echo " OK" && exit 0
+              echo " retry $i..."
+            done
+            echo " Health check failed after 5 retries"
+            exit 1
