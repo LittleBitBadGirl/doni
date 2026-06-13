@@ -200,7 +200,10 @@ async def seed() -> None:
                 {"label": "Аварийная служба", "number": "+7 (812) 000-00-01"},
             ],
             map_embed_url=(
-                "https://yandex.ru/map-widget/v1/?ll=30.404561%2C59.713430&z=14&l=map"
+                "https://yandex.ru/map-widget/v1/"
+                "?ll=30.222776%2C59.674360"
+                "&pt=30.222776%2C59.674360%2Cpm2rdm"
+                "&z=16&l=map"
             ),
         )
         session.add(contact)

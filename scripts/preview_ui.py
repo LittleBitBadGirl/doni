@@ -283,7 +283,12 @@ PAGES: list[tuple[str, str, dict]] = [
                     SimpleNamespace(label="Председатель", number="+7 (812) 000-00-00"),
                     SimpleNamespace(label="Правление", number="+7 (921) 000-00-00"),
                 ],
-                map_embed_url=None,
+                map_embed_url=(
+                    "https://yandex.ru/map-widget/v1/"
+                    "?ll=30.222776%2C59.674360"
+                    "&pt=30.222776%2C59.674360%2Cpm2rdm"
+                    "&z=16&l=map"
+                ),
                 updated_at=NOW,
             ),
         },
