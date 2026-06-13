@@ -1,0 +1,24 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /opt/doni
+            git pull
+            ./venv/bin/pip install -r requirements.txt -q
+            ./venv/bin/alembic upgrade head
+            systemctl restart doni
+            sleep 2
+            curl -s http://localhost:8765/health
