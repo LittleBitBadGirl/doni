@@ -12,6 +12,7 @@ from wtforms import BooleanField, PasswordField
 from wtforms.validators import Length, Optional
 
 from app.admin_export import build_xlsx_response
+from app.admin_widgets import HTML_CONTENT_FORM_ARGS, HtmlEditorField
 from app.admin_formatters import (
     format_admin_user,
     format_audit_action,
@@ -141,7 +142,14 @@ class AdminUserAdmin(DoniModelView, model=AdminUser):
             model.password_hash = hash_password(password)
 
 
-class NewsAdmin(DoniModelView, model=News):
+class HtmlContentAdminMixin:
+    """Визуальный редактор для полей HTML-контента (без ручных тегов)."""
+
+    form_overrides = {"content": HtmlEditorField}
+    form_args = {"content": HTML_CONTENT_FORM_ARGS}
+
+
+class NewsAdmin(HtmlContentAdminMixin, DoniModelView, model=News):
     name = "Новость"
     name_plural = "Новости"
     icon = "fa-solid fa-newspaper"
@@ -168,7 +176,6 @@ class NewsAdmin(DoniModelView, model=News):
         News.created_by: format_admin_user,
     }
     form_columns = [News.title, News.content, News.is_pinned, News.published_at]
-    form_widget_args = {"content": {"rows": 10}}
 
     async def scaffold_form(self):
         form_class = await super().scaffold_form()
@@ -346,7 +353,7 @@ class FinanceInfoAdmin(DoniModelView, model=FinanceInfo):
         delete_stored_file(model.debtors_filename)
 
 
-class InfrastructurePageAdmin(DoniModelView, model=InfrastructurePage):
+class InfrastructurePageAdmin(HtmlContentAdminMixin, DoniModelView, model=InfrastructurePage):
     name = "Инфраструктура"
     name_plural = "Инфраструктура"
     icon = "fa-solid fa-road"
@@ -368,7 +375,6 @@ class InfrastructurePageAdmin(DoniModelView, model=InfrastructurePage):
     column_formatters_detail = column_formatters
     form_columns = [InfrastructurePage.slug, InfrastructurePage.title, InfrastructurePage.content]
     form_widget_args = {
-        "content": {"rows": 10},
         "slug": {"readonly": True},
     }
 
